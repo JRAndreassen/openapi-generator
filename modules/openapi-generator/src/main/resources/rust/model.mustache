@@ -1,4 +1,6 @@
 {{>partial_header}}
+{{#vendorExtensions.x-add-use}}{{{.}}}{{/vendorExtensions.x-add-use}}
+
 {{#models}}
 {{#model}}
 {{#description}}
@@ -8,6 +10,7 @@
 {{!-- for enum schemas --}}
 {{#isEnum}}
 /// {{{description}}}
+{{#vendorExtensions.x-add-derive-enum}}{{{.}}}{{/vendorExtensions.x-add-derive-enum}}
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
 pub enum {{classname}} {
 {{#allowableValues}}
@@ -20,6 +23,7 @@ pub enum {{classname}} {
 
 {{!-- for schemas that have a discriminator --}}
 {{#discriminator}}
+{{#vendorExtensions.x-add-derive-enum}}{{{.}}}{{/vendorExtensions.x-add-derive-enum}}
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 #[serde(tag = "{{{vendorExtensions.x-tag-name}}}")]
 pub enum {{classname}} {
@@ -44,6 +48,7 @@ pub enum {{classname}} {
 {{!-- for non-enum schemas --}}
 {{^isEnum}}
 {{^discriminator}}
+{{#vendorExtensions.x-add-derive-struct}}{{{.}}}{{/vendorExtensions.x-add-derive-struct}}
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct {{{classname}}} {
 {{#vars}}
@@ -74,6 +79,7 @@ impl {{{classname}}} {
 {{#vars}}
 {{#isEnum}}
 /// {{{description}}}
+{{#vendorExtensions.x-add-derive-enum}}{{{.}}}{{/vendorExtensions.x-add-derive-enum}}
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
 pub enum {{enumName}} {
 {{#allowableValues}}

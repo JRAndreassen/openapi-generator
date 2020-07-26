@@ -4,6 +4,7 @@ use reqwest;
 
 use crate::apis::ResponseContent;
 use super::{Error, configuration};
+{{#vendorExtensions.x-add-use}}{{{.}}}{{/vendorExtensions.x-add-use}}
 
 {{#operations}}
 {{#operation}}
@@ -11,6 +12,7 @@ use super::{Error, configuration};
 {{#allParams}}
 {{#-first}}
 /// struct for passing parameters to the method `{{operationId}}`
+{{#vendorExtensions.x-add-derive-struct}}{{{.}}}{{/vendorExtensions.x-add-derive-struct}}
 #[derive(Clone, Debug)]
 pub struct {{{operationIdCamelCase}}}Params {
 {{/-first}}
@@ -31,6 +33,7 @@ pub struct {{{operationIdCamelCase}}}Params {
 {{#operations}}
 {{#operation}}
 /// struct for typed successes of method `{{operationId}}`
+{{#vendorExtensions.x-add-derive-enum}}{{{.}}}{{/vendorExtensions.x-add-derive-enum}}
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum {{{operationIdCamelCase}}}Success {
@@ -51,6 +54,7 @@ pub enum {{{operationIdCamelCase}}}Success {
 {{#operations}}
 {{#operation}}
 /// struct for typed errors of method `{{operationId}}`
+{{#vendorExtensions.x-add-derive-enum}}{{{.}}}{{/vendorExtensions.x-add-derive-enum}}
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum {{{operationIdCamelCase}}}Error {

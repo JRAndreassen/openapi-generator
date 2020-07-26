@@ -9,6 +9,7 @@ serde = "^1.0"
 serde_derive = "^1.0"
 serde_json = "^1.0"
 url = "1.5"
+{{#vendorExtensions.x-add-dependencies}}{{{.}}}{{/vendorExtensions.x-add-dependencies}}
 {{#hyper}}
 hyper = "~0.11"
 serde_yaml = "0.7"
@@ -28,6 +29,7 @@ features = ["json"]
 {{/reqwest}}
 
 [dev-dependencies]
+{{#vendorExtensions.x-add-dependencies-dev}}{{{.}}}{{/vendorExtensions.x-add-dependencies-dev}}
 {{#hyper}}
 tokio-core = "*"
 {{/hyper}}
